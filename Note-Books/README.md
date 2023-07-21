@@ -1,6 +1,6 @@
 # Table of Contents
 
-- [Preprocessed Text Classification Dataset](https://github.com/hosseindamavandi/Fake-News-Detection/tree/main/Note-Books#preprocessingipynb)
+- [Preprocessed Text Classification Dataset](https://github.com/hosseindamavandi/Fake-News-Detection/blob/main/Note-Books/README.md#preprocessingipynb)
 - [Artificial Neural Networks (ANN)](https://github.com/hosseindamavandi/Fake-News-Detection/blob/main/Note-Books/README.md#ann)
 - [CNN](#)
 - [LSTM](#)
