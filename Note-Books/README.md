@@ -1,7 +1,7 @@
 # Table of Contents
 
 - [Preprocessed Text Classification Dataset](https://github.com/hosseindamavandi/Fake-News-Detection/tree/main/Note-Books#preprocessingipynb)
-- [ANN](#)
+- [ANN](https://github.com/hosseindamavandi/Fake-News-Detection/edit/main/Note-Books/README.md#ann)
 - [CNN](#)
 - [LSTM](#)
 
@@ -50,3 +50,32 @@ The provided code performs the following tasks:
 1. Ensure you have the required libraries installed and the NLTK resources downloaded.
 2. Place the "True.csv" and "Fake.csv" files (containing real and fake news data) in a folder named "datasets" within the project directory.
 3. Run the code to preprocess the data and obtain the "preprocessed_dataset.csv" file.
+
+
+# ANN
+
+This directory contains codes and results related to Artificial Neural Networks (ANN) for Fake News Detection.
+
+## Results
+
+Here are the details and results of different ANN models implemented for Fake News Detection:
+
+1. [ANN.ipynb](https://github.com/hosseindamavandi/Fake-News-Detection/blob/main/Note-Books/ANN/ANN.ipynb):
+   - Model Accuracy: 0.9662
+   - Details: This notebook demonstrates training a basic ANN model with default parameters.
+
+2. [ANN_Using_L1_L2.ipynb](https://github.com/hosseindamavandi/Fake-News-Detection/blob/main/Note-Books/ANN/ANN_Using_L1_L2.ipynb):
+   - Model Accuracy: 0.8964
+   - Details: This notebook explores using L1 and L2 regularization techniques with the ANN model.
+
+3. [ANN_Using_Dropout.ipynb](https://github.com/hosseindamavandi/Fake-News-Detection/blob/main/Note-Books/ANN/ANN_Using_Dropout.ipynb):
+   - Model Accuracy: :white_check_mark: 0.9696
+   - Details: In this notebook, Dropout layers are implemented to prevent overfitting of the ANN model.
+
+4. [ANN_Using_Dropout_L1_L2.ipynb](https://github.com/hosseindamavandi/Fake-News-Detection/blob/main/Note-Books/ANN/ANN_Using_Dropout_L1_L2.ipynb):
+   - Model Accuracy: 0.9554
+   - Details: This notebook combines Dropout, L1, and L2 regularization techniques to optimize the ANN model's performance.
+
+Each notebook focuses on different aspects of ANN modeling and regularization techniques, providing insights into how to improve the model's accuracy and generalization for Fake News Detection.
+
+The results presented above are based on the specific dataset and configurations used during model training. Keep in mind that results might vary depending on the dataset and specific parameters used.
