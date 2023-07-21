@@ -2,6 +2,7 @@
 
 - [Preprocessed Text Classification Dataset](https://github.com/hosseindamavandi/Fake-News-Detection/tree/main/Note-Books#preprocessingipynb)
 - [ANN](#)
+- [CNN](#)
 - [LSTM](#)
 
 
