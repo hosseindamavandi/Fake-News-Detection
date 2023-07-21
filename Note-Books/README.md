@@ -9,7 +9,7 @@
 # Preprocessing.ipynb
 ## Preprocessed Text Classification Dataset
 
-This repository contains code for preprocessing a text classification dataset using Python's Natural Language Toolkit (NLTK) and Gensim's Word2Vec model. The dataset used in this code includes both real and fake news samples, and the goal is to prepare the data for machine learning models.
+This file contains code for preprocessing a text classification dataset using Python's Natural Language Toolkit (NLTK) and Gensim's Word2Vec model. The dataset used in this code includes both real and fake news samples, and the goal is to prepare the data for machine learning models.
 
 ## Requirements
 
