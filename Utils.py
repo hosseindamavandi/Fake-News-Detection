@@ -63,7 +63,7 @@ def Training(
             loss_value = loss(y_hat, y)
             optimizer.zero_grad()
             
-            # TODO: Fix Regularization
+            # TODO: #! Fix Regularization, Ask why it's not working?
             # #* Regularization L1 and L2
             # if apply_l1 and apply_l2:
             #     parameters = []

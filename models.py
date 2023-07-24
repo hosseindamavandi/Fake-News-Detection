@@ -53,6 +53,7 @@ class Linear_block(nn.Module):
 class CNN1D(nn.Module):
     def __init__(self):
         super(CNN1D, self).__init__()
+        # TODO : #! Why the kernel size must be one?
         self.conv1 = nn.Conv1d(
             in_channels=100, out_channels=64, kernel_size=1, stride=1, padding=1
         )
@@ -101,42 +102,55 @@ class CNN1D(nn.Module):
 
         return out
 
-#* here > https://cnvrg.io/pytorch-lstm/
+
+# * here > https://cnvrg.io/pytorch-lstm/
 class BILSTM(nn.Module):
-    def __init__(self, input_size, hidden_size, num_layers, num_classes, bidirection=True):
+    def __init__(
+        self, input_size, hidden_size, num_layers, num_classes, bidirection=True
+    ):
         super(BILSTM, self).__init__()
 
         self.hidden_size = hidden_size
         self.num_layers = num_layers
         self.bidirection = bidirection
-        
-        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True, bidirectional=self.bidirection)
-        self.FC = nn.Linear(hidden_size*2, num_classes)
+
+        self.lstm = nn.LSTM(
+            input_size,
+            hidden_size,
+            num_layers,
+            batch_first=True,
+            bidirectional=self.bidirection,
+        )
+        self.FC = nn.Linear(hidden_size * 2, num_classes)
         self.FC_activation = nn.LeakyReLU()
 
         self.output_actication = nn.Sigmoid()
 
-        
-        
-        
-    def forward(self,x):
+    def forward(self, x):
         if x.dim() == 2:
             x = x.unsqueeze(1)
             if x.size(1) == 1:
                 pass
             else:
-                raise ValueError("Input dimension must be [batch_size, seq_len, input_size]")
-        
+                raise ValueError(
+                    "Input dimension must be [batch_size, seq_len, input_size]"
+                )
+
         if self.bidirection:
-            state_size = self.num_layers*2
+            state_size = self.num_layers * 2
         else:
             state_size = self.num_layers
-            
-            
-        hidden_state_0 = torch.zeros(state_size, x.size(0), self.hidden_size).to(x.device)
-        cell_state_0  = torch.zeros(state_size, x.size(0), self.hidden_size).to(x.device)
+
+        hidden_state_0 = torch.zeros(state_size, x.size(0), self.hidden_size).to(
+            x.device
+        )
+        cell_state_0 = torch.zeros(state_size, x.size(0), self.hidden_size).to(x.device)
+
+        out, _ = self.lstm(
+            x, (hidden_state_0, cell_state_0)
+        )  # _ = (hidden_state, cell_state)
         
-        out, _ = self.lstm(x, (hidden_state_0, cell_state_0)) # _ = (hidden_state, cell_state)
+        #TODO: #! why do we take out[:, -1, :]?
         out = self.FC(out[:, -1, :])
         out = self.FC_activation(out)
         out = self.output_actication(out)
