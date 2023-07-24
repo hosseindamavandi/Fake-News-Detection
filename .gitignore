@@ -1,3 +1,4 @@
-test.ipynb
 datasets\Fake.csv
 model.pth
+word2vec_model
+*.zip

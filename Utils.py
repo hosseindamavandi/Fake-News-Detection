@@ -2,10 +2,6 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 
 
-def hello():
-    print("Hello Hussein!")
-
-
 class TextDataset(Dataset):
     def __init__(self, X, y) -> None:
         super().__init__()
@@ -60,12 +56,14 @@ def Training(
         epoch_loss = 0
         epoch_acc = 0
         for x, y in train_loader:
+            model.train()
             x = x.to(DEVICE)
             y = y.unsqueeze(1).to(DEVICE)
             y_hat = model(x)
             loss_value = loss(y_hat, y)
             optimizer.zero_grad()
             
+            # TODO: Fix Regularization
             # #* Regularization L1 and L2
             # if apply_l1 and apply_l2:
             #     parameters = []
@@ -101,8 +99,8 @@ def Training(
         train_epoch_acc.append(epoch_acc / len(train_loader))
 
         if epoch % print_every == 0:
-            print(f"Epoch {epoch} | Train Loss: {epoch_loss/len(train_loader)}")
-            print(f"Epoch {epoch} | Train Acc: {epoch_acc/len(train_loader)}")
+            print(f"Epoch {epoch} | Train Loss: {epoch_loss/len(train_loader):.5f}")
+            print(f"Epoch {epoch} | Train Acc: {epoch_acc/len(train_loader):.2f}%")
             # print("--------------------------------------------------")
 
         with torch.no_grad():
@@ -120,10 +118,10 @@ def Training(
             test_epoch_acc.append(epoch_acc / len(test_loader))
             if epoch_loss < min(test_epoch_loss):
                 print(f'Test loss decreased from {min(test_epoch_loss)} to {epoch_loss} saving new best model')
-                torch.save(model.state_dict(), "best_model.pth")
+                torch.save(model.state_dict(), f"{str(model._get_name())}_best_model.pth")
             if epoch % print_every == 0:
-                print(f"Epoch {epoch} | Test Loss: {epoch_loss/len(test_loader)}")
-                print(f"Epoch {epoch} | Test Acc: {epoch_acc/len(test_loader)}")
+                print(f"Epoch {epoch} | Test Loss: {epoch_loss/len(test_loader):.5f}")
+                print(f"Epoch {epoch} | Test Acc: {epoch_acc/len(test_loader):.2f}%")
                 print("--------------------------------------------------")
 
 
