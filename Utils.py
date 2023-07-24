@@ -72,8 +72,8 @@ def Training(
                     parameters.append(parameter.view(-1))
                 l1 = l1_weight * model.compute_l1_loss(torch.cat(parameters))
                 l2 = l2_weight * model.compute_l2_loss(torch.cat(parameters))
-                loss += l1
-                loss += l2
+                loss_value += l1
+                loss_value += l2
                 
             #* Regularization L1 only
             elif apply_l1:
@@ -81,7 +81,7 @@ def Training(
                 for parameter in model.parameters():
                     parameters.append(parameter.view(-1))
                 l1 = l1_weight * model.compute_l1_loss(torch.cat(parameters))
-                loss += l1
+                loss_value += l1
             
             #* Regularization L2 only
             if apply_l1 and apply_l2:
@@ -89,7 +89,7 @@ def Training(
                 for parameter in model.parameters():
                     parameters.append(parameter.view(-1))
                 l2 = l2_weight * model.compute_l2_loss(torch.cat(parameters))
-                loss += l2
+                loss_value += l2
 
             loss_value.backward()
             optimizer.step()
