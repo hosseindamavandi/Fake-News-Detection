@@ -32,3 +32,38 @@ class ANN(nn.Module):
         out = self.output_actication(out)
 
         return out
+
+
+class CNN1D(nn.Module):
+    def __init__(self):
+        super(CNN1D, self).__init__()
+        self.conv1 = nn.Conv1d(in_channels=100, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv1d(in_channels=64, out_channels=16, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv1d(in_channels=16, out_channels=4, kernel_size=3, stride=1, padding=1)
+        self.conv4 = nn.Conv1d(in_channels=4, out_channels=1, kernel_size=3, stride=1, padding=1)
+        self.dropout1d = nn.Dropout(0.25)
+        self.cnn_activation = nn.LeakyReLU()
+        self.output_actication = nn.Sigmoid()
+        
+        
+    # * L1 Regularization
+    def compute_l1_loss(self, w):
+        return torch.abs(w).sum()
+
+    # * L2 Regularization
+    def compute_l2_loss(self, w):
+        return torch.pow(w, 2).sum()
+
+    def forward(self, x):
+        x = x.unsqueeze(-1)
+        out = self.cnn_activation(self.conv1(x))
+        # out = self.pool(out)
+        out = self.cnn_activation(self.conv2(out))
+        out = self.cnn_activation(self.conv3(out))
+        out = self.cnn_activation(self.conv4(out))
+        # out = self.pool(out)
+        out = self.dropout1d(out)
+        out = out.squeeze(-1)
+        out = self.output_actication(out)
+        
+        return out

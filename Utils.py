@@ -49,6 +49,7 @@ def Training(
         y_pred = torch.round(y_pred)
         return (y_true == y_pred).sum() / len(y_true)
 
+    model = model.to(DEVICE)
     train_epoch_loss = []
     test_epoch_loss = []
 
