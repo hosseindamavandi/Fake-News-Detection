@@ -33,14 +33,35 @@ class ANN(nn.Module):
 
         return out
 
+class Linear_block(nn.Module):
+    def __init__(self, in_channel, out_channel, activation = nn.LeakyReLU(), dorp_ratio=0.5):
+        super().__init__()
+        self.Linear_block = nn.Sequential(
+            nn.Linear(in_channel, out_channel),
+            activation,
+            nn.Dropout(dorp_ratio),
+        )
+
+    def forward(self, x):
+        out = self.Linear_block(x)
+        return out
 
 class CNN1D(nn.Module):
     def __init__(self):
         super(CNN1D, self).__init__()
-        self.conv1 = nn.Conv1d(in_channels=100, out_channels=64, kernel_size=3, stride=1, padding=1)
-        self.conv2 = nn.Conv1d(in_channels=64, out_channels=16, kernel_size=3, stride=1, padding=1)
-        self.conv3 = nn.Conv1d(in_channels=16, out_channels=4, kernel_size=3, stride=1, padding=1)
-        self.conv4 = nn.Conv1d(in_channels=4, out_channels=1, kernel_size=3, stride=1, padding=1)
+        self.conv1 = nn.Conv1d(in_channels=100, out_channels=64, kernel_size=1, stride=1, padding=1)
+        self.conv2 = nn.Conv1d(in_channels=64, out_channels=32, kernel_size=1, stride=1, padding=1)
+        self.conv3 = nn.Conv1d(in_channels=32, out_channels=16, kernel_size=1, stride=1, padding=1)
+        self.pool = nn.MaxPool1d(kernel_size=1, stride=1)
+        
+        self.mlp = nn.Sequential(
+            Linear_block(112, 1),
+            # Linear_block(100, 50),
+            # Linear_block(50, 20),
+            # Linear_block(20, 1),
+        )
+            
+        
         self.dropout1d = nn.Dropout(0.25)
         self.cnn_activation = nn.LeakyReLU()
         self.output_actication = nn.Sigmoid()
@@ -57,13 +78,18 @@ class CNN1D(nn.Module):
     def forward(self, x):
         x = x.unsqueeze(-1)
         out = self.cnn_activation(self.conv1(x))
-        # out = self.pool(out)
-        out = self.cnn_activation(self.conv2(out))
-        out = self.cnn_activation(self.conv3(out))
-        out = self.cnn_activation(self.conv4(out))
-        # out = self.pool(out)
-        out = self.dropout1d(out)
-        out = out.squeeze(-1)
-        out = self.output_actication(out)
+        out = self.pool(out)
         
+        out = self.cnn_activation(self.conv2(out))
+        out = self.pool(out)
+        
+        out = self.cnn_activation(self.conv3(out))
+        out = self.pool(out)
+        
+        out = nn.Flatten()(out)
+        #* change the dimension to fit the MLP
+        # out = out.squeeze(-1)
+        out = self.mlp(out)
+        out = self.output_actication(out)
+
         return out

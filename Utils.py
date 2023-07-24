@@ -40,10 +40,10 @@ def Training(
     loss,
     optimizer,
     print_every=10,
-    apply_l1=False,
-    apply_l2=False,
-    l1_weight=0.0001,
-    l2_weight=0.0001,
+    # apply_l1=False,
+    # apply_l2=False,
+    # l1_weight=0.0001,
+    # l2_weight=0.0001,
 ):
     def acc_func(y_true, y_pred):
         y_pred = torch.round(y_pred)
@@ -66,31 +66,31 @@ def Training(
             loss_value = loss(y_hat, y)
             optimizer.zero_grad()
             
-            #* Regularization L1 and L2
-            if apply_l1 and apply_l2:
-                parameters = []
-                for parameter in model.parameters():
-                    parameters.append(parameter.view(-1))
-                l1 = l1_weight * model.compute_l1_loss(torch.cat(parameters))
-                l2 = l2_weight * model.compute_l2_loss(torch.cat(parameters))
-                loss_value += l1
-                loss_value += l2
+            # #* Regularization L1 and L2
+            # if apply_l1 and apply_l2:
+            #     parameters = []
+            #     for parameter in model.parameters():
+            #         parameters.append(parameter.view(-1))
+            #     l1 = l1_weight * model.compute_l1_loss(torch.cat(parameters))
+            #     l2 = l2_weight * model.compute_l2_loss(torch.cat(parameters))
+            #     loss_value += l1
+            #     loss_value += l2
                 
-            #* Regularization L1 only
-            elif apply_l1:
-                parameters = []
-                for parameter in model.parameters():
-                    parameters.append(parameter.view(-1))
-                l1 = l1_weight * model.compute_l1_loss(torch.cat(parameters))
-                loss_value += l1
+            # #* Regularization L1 only
+            # elif apply_l1:
+            #     parameters = []
+            #     for parameter in model.parameters():
+            #         parameters.append(parameter.view(-1))
+            #     l1 = l1_weight * model.compute_l1_loss(torch.cat(parameters))
+            #     loss_value += l1
             
-            #* Regularization L2 only
-            if apply_l1 and apply_l2:
-                parameters = []
-                for parameter in model.parameters():
-                    parameters.append(parameter.view(-1))
-                l2 = l2_weight * model.compute_l2_loss(torch.cat(parameters))
-                loss_value += l2
+            # #* Regularization L2 only
+            # if apply_l1 and apply_l2:
+            #     parameters = []
+            #     for parameter in model.parameters():
+            #         parameters.append(parameter.view(-1))
+            #     l2 = l2_weight * model.compute_l2_loss(torch.cat(parameters))
+            #     loss_value += l2
 
             loss_value.backward()
             optimizer.step()
@@ -103,7 +103,7 @@ def Training(
         if epoch % print_every == 0:
             print(f"Epoch {epoch} | Train Loss: {epoch_loss/len(train_loader)}")
             print(f"Epoch {epoch} | Train Acc: {epoch_acc/len(train_loader)}")
-            print("--------------------------------------------------")
+            # print("--------------------------------------------------")
 
         with torch.no_grad():
             model.eval()
