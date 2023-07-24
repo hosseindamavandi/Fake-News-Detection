@@ -81,7 +81,8 @@ def Training(
             test_epoch_loss.append(epoch_loss / len(test_loader))
             test_epoch_acc.append(epoch_acc / len(test_loader))
             if epoch_loss < min(test_epoch_loss):
-                torch.save(model.state_dict(), "model.pth")
+                print(f'Test loss decreased from {min(test_epoch_loss)} to {epoch_loss} saving new best model')
+                torch.save(model.state_dict(), "best_model.pth")
             if epoch % print_every == 0:
                 print(f"Epoch {epoch} | Test Loss: {epoch_loss/len(test_loader)}")
                 print(f"Epoch {epoch} | Test Acc: {epoch_acc/len(test_loader)}")
