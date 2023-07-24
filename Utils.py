@@ -3,7 +3,7 @@ from torch.utils.data import Dataset, DataLoader
 
 
 def hello():
-    print("Hello World!")
+    print("Hello Hussein!")
 
 
 class TextDataset(Dataset):
