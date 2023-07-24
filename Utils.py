@@ -2,6 +2,10 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 
 
+def hello():
+    print("Hello World!")
+
+
 class TextDataset(Dataset):
     def __init__(self, X, y) -> None:
         super().__init__()
