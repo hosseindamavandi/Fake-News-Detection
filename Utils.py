@@ -71,6 +71,7 @@ def Training(
         if epoch % print_every == 0:
             print(f"Epoch {epoch} | Train Loss: {epoch_loss/len(train_loader)}")
             print(f"Epoch {epoch} | Train Acc: {epoch_acc/len(train_loader)}")
+            print("--------------------------------------------------")
 
         with torch.no_grad():
             epoch_loss = 0
@@ -90,5 +91,7 @@ def Training(
             if epoch % print_every == 0:
                 print(f"Epoch {epoch} | Test Loss: {epoch_loss/len(test_loader)}")
                 print(f"Epoch {epoch} | Test Acc: {epoch_acc/len(test_loader)}")
+                print("--------------------------------------------------")
+
 
     return train_epoch_loss, test_epoch_loss, train_epoch_acc, test_epoch_acc
