@@ -40,6 +40,10 @@ def Training(
     loss,
     optimizer,
     print_every=10,
+    apply_l1=False,
+    apply_l2=False,
+    l1_weight=0.0001,
+    l2_weight=0.0001,
 ):
     def acc_func(y_true, y_pred):
         y_pred = torch.round(y_pred)
@@ -60,6 +64,33 @@ def Training(
             y_hat = model(x)
             loss_value = loss(y_hat, y)
             optimizer.zero_grad()
+            
+            #* Regularization L1 and L2
+            if apply_l1 and apply_l2:
+                parameters = []
+                for parameter in model.parameters():
+                    parameters.append(parameter.view(-1))
+                l1 = l1_weight * model.compute_l1_loss(torch.cat(parameters))
+                l2 = l2_weight * model.compute_l2_loss(torch.cat(parameters))
+                loss += l1
+                loss += l2
+                
+            #* Regularization L1 only
+            elif apply_l1:
+                parameters = []
+                for parameter in model.parameters():
+                    parameters.append(parameter.view(-1))
+                l1 = l1_weight * model.compute_l1_loss(torch.cat(parameters))
+                loss += l1
+            
+            #* Regularization L2 only
+            if apply_l1 and apply_l2:
+                parameters = []
+                for parameter in model.parameters():
+                    parameters.append(parameter.view(-1))
+                l2 = l2_weight * model.compute_l2_loss(torch.cat(parameters))
+                loss += l2
+
             loss_value.backward()
             optimizer.step()
 
@@ -74,6 +105,7 @@ def Training(
             print("--------------------------------------------------")
 
         with torch.no_grad():
+            model.eval()
             epoch_loss = 0
             epoch_acc = 0
             for x, y in test_loader:

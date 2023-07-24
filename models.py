@@ -1,4 +1,7 @@
 from torch import nn
+import torch
+
+
 class ANN(nn.Module):
     def __init__(self):
         super().__init__()
@@ -12,8 +15,15 @@ class ANN(nn.Module):
         self.Hl_actication = nn.LeakyReLU()
         self.output_actication = nn.Sigmoid()
 
+    # * L1 Regularization
+    def compute_l1_loss(self, w):
+        return torch.abs(w).sum()
 
-    def forward(self,x):
+    # * L2 Regularization
+    def compute_l2_loss(self, w):
+        return torch.pow(w, 2).sum()
+
+    def forward(self, x):
         out = self.dropout1(self.Hl_actication(self.linear1(x)))
         out = self.dropout1(self.Hl_actication(self.linear2(out)))
         out = self.dropout1(self.Hl_actication(self.linear3(out)))
@@ -22,5 +32,3 @@ class ANN(nn.Module):
         out = self.output_actication(out)
 
         return out
-
-
