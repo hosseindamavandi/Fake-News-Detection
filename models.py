@@ -87,6 +87,7 @@ class CNN1D(nn.Module):
     def forward(self, x):
         # * [128, 100] -> [128, 100, 1] [batch, channel(x)/dimension(x,y), length/depth(c)]
         x = x.unsqueeze(-1)
+        print(x.shape)
         out = self.cnn_activation(self.conv1(x))
         out = self.pool(out)
 

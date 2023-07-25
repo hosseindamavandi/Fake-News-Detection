@@ -51,8 +51,12 @@ def Training(
     # l2_weight=0.0001,
 ):
     if load_saved_model:
-        print("Loading saved model")
-        model.load_state_dict(torch.load(f"{(model._get_name())}_best_model.pth"))
+        try :
+            model.load_state_dict(torch.load(f"{(model._get_name())}_best_model.pth"))
+            print(f"Loaded saved model {(model._get_name())}_best_model.pth successfully")
+        except FileNotFoundError:
+            print("No saved model found, training from scratch")
+        
     model = model.to(DEVICE)
     # acc_func = Accuracy(task='binary').to(DEVICE)
     train_epoch_loss = []
@@ -146,7 +150,7 @@ def Training(
                             )
                     except ValueError:
                         print(
-                            f"Test loss decreased from inf to {epoch_loss:.5f} saving new best model"
+                            f"Test loss decreased to {epoch_loss:.5f} saving new best model"
                         )
                         torch.save(
                             model.state_dict(), f"{(model._get_name())}_best_model.pth"
@@ -161,11 +165,11 @@ def Training(
             "accuracy": train_epoch_acc,
             "val_accuracy": test_epoch_acc,
         }
-        with open(f"{(model._get_name())}_history.csv", 'a') as f_object:
-            field_names = list(history.keys())
-            dictwriter_object = DictWriter(f_object, fieldnames=field_names)
-            dictwriter_object.writerow(history)
-            f_object.close()
+        # with open(f"{(model._get_name())}_history.csv", 'a') as f_object:
+        #     field_names = list(history.keys())
+        #     dictwriter_object = DictWriter(f_object, fieldnames=field_names)
+        #     dictwriter_object.writerow(history)
+        #     f_object.close()
             
 
         print("Interrupted, returning saved history")
