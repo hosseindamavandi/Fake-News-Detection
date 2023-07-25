@@ -88,3 +88,4 @@ plt.figure(figsize = (16,9))
 most_common_tri =mcw(df.text,10,3)
 most_common_tri = dict(most_common_tri)
 sns.barplot(x=list(most_common_tri.values()),y=list(most_common_tri.keys()))
+#push test
