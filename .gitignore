@@ -1,8 +1,5 @@
 datasets\Fake.csv
-model.pth
 word2vec_model
 *.zip
-*.pth
 *.csv
 creds.py
-hussein_files
