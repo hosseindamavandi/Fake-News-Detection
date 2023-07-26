@@ -52,8 +52,8 @@ def Training(
 ):
     if load_saved_model:
         try :
-            model.load_state_dict(torch.load(f"{(model._get_name())}_best_model.pth"))
-            print(f"Loaded saved model {(model._get_name())}_best_model.pth successfully")
+            model.load_state_dict(torch.load(f"model_files/{(model._get_name())}_best_model.pth"))
+            print(f"Loaded saved model model_files/{(model._get_name())}_best_model.pth successfully")
         except FileNotFoundError:
             print("No saved model found, training from scratch")
         
@@ -153,7 +153,7 @@ def Training(
                             f"Test loss decreased to {epoch_loss:.5f} saving new best model"
                         )
                         torch.save(
-                            model.state_dict(), f"{(model._get_name())}_best_model.pth"
+                            model.state_dict(), f"model_files/{(model._get_name())}_best_model.pth"
                         )
                     print("--------------------------------------------------")
                 test_epoch_loss.append(epoch_loss)
