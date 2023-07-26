@@ -74,6 +74,17 @@ def remove_number(text):
     number = re.compile(r'\d+')
     return number.sub(r' number ', text)
 
+def remove_nulls(data):
+    indices = []
+    for i in range(len(data)):
+        try:
+            if len(data.iloc[i]['text_vector']) != 100:
+                print(i, len(data.iloc[i]['text_vector']))
+        except:
+            indices.append(i)
+
+    new_data = data.drop(indices)
+    return new_data
 
 def vectorize_text(text, model):
     vectors = [model.wv[word] for word in text if word in model.wv]
