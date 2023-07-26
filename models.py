@@ -11,7 +11,7 @@ class ANN(nn.Module):
         self.linear4 = nn.Linear(100, 20)
         self.linear5 = nn.Linear(20, 1)
 
-        self.dropout1 = nn.Dropout(0.25)
+        self.dropout1 = nn.Dropout(0.35)
         self.Hl_actication = nn.LeakyReLU()
         self.output_actication = nn.Sigmoid()
 
@@ -36,7 +36,7 @@ class ANN(nn.Module):
 
 class Linear_block(nn.Module):
     def __init__(
-        self, in_channel, out_channel, activation=nn.LeakyReLU(), dorp_ratio=0.25
+        self, in_channel, out_channel, activation=nn.LeakyReLU(), dorp_ratio=0.1
     ):
         super().__init__()
         self.Linear_block = nn.Sequential(
@@ -54,11 +54,13 @@ class CNN1D(nn.Module):
     def __init__(self):
         super(CNN1D, self).__init__()
         # TODO : #! Why the kernel size must be one?
+        #* [128, 100, 1] -> [batch size, input dimension, depth]
+        #* [128, 100] -> i can change the kernel
         self.conv1 = nn.Conv1d(
-            in_channels=100, out_channels=64, kernel_size=1, stride=1, padding=1
+            in_channels=100, out_channels=256, kernel_size=1, stride=1, padding=1
         )
         self.conv2 = nn.Conv1d(
-            in_channels=64, out_channels=32, kernel_size=1, stride=1, padding=1
+            in_channels=256, out_channels=32, kernel_size=1, stride=1, padding=1
         )
         self.conv3 = nn.Conv1d(
             in_channels=32, out_channels=16, kernel_size=1, stride=1, padding=1
@@ -66,13 +68,13 @@ class CNN1D(nn.Module):
         self.pool = nn.MaxPool1d(kernel_size=1, stride=1)
 
         self.mlp = nn.Sequential(
-            Linear_block(112, 50),
+            Linear_block(112, 250),
             # Linear_block(100, 50),
-            Linear_block(50, 1),
+            Linear_block(250, 1),
             # Linear_block(20, 1),
         )
 
-        self.dropout1d = nn.Dropout(0.15)
+        # self.dropout1d = nn.Dropout(0.15)
         self.cnn_activation = nn.LeakyReLU()
         self.output_actication = nn.Sigmoid()
 
@@ -87,7 +89,6 @@ class CNN1D(nn.Module):
     def forward(self, x):
         # * [128, 100] -> [128, 100, 1] [batch, channel(x)/dimension(x,y), length/depth(c)]
         x = x.unsqueeze(-1)
-        print(x.shape)
         out = self.cnn_activation(self.conv1(x))
         out = self.pool(out)
 
@@ -96,7 +97,8 @@ class CNN1D(nn.Module):
 
         out = self.cnn_activation(self.conv3(out))
         out = self.pool(out)
-
+        
+        #* [128, 16, 7] -> [128, 112]
         out = nn.Flatten()(out)
         out = self.mlp(out)
         out = self.output_actication(out)
@@ -142,14 +144,9 @@ class BILSTM(nn.Module):
         else:
             state_size = self.num_layers
 
-        hidden_state_0 = torch.zeros(state_size, x.size(0), self.hidden_size).to(
-            x.device
-        )
+        hidden_state_0 = torch.zeros(state_size, x.size(0), self.hidden_size).to(x.device)
         cell_state_0 = torch.zeros(state_size, x.size(0), self.hidden_size).to(x.device)
-
-        out, _ = self.lstm(
-            x, (hidden_state_0, cell_state_0)
-        )  # _ = (hidden_state, cell_state)
+        out, _ = self.lstm(x, (hidden_state_0, cell_state_0))  # _ = (hidden_state, cell_state)
         
         #TODO: #! why do we take out[:, -1, :]?
         out = self.FC(out[:, -1, :])
