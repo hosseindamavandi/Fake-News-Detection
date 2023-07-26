@@ -67,9 +67,7 @@ class CNN1D(nn.Module):
 
         self.mlp = nn.Sequential(
             Linear_block(112, 50),
-            # Linear_block(100, 50),
             Linear_block(50, 1),
-            # Linear_block(20, 1),
         )
 
         self.dropout1d = nn.Dropout(0.15)
@@ -87,7 +85,6 @@ class CNN1D(nn.Module):
     def forward(self, x):
         # * [128, 100] -> [128, 100, 1] [batch, channel(x)/dimension(x,y), length/depth(c)]
         x = x.unsqueeze(-1)
-        print(x.shape)
         out = self.cnn_activation(self.conv1(x))
         out = self.pool(out)
 
@@ -150,8 +147,8 @@ class BILSTM(nn.Module):
         out, _ = self.lstm(
             x, (hidden_state_0, cell_state_0)
         )  # _ = (hidden_state, cell_state)
-        
-        #TODO: #! why do we take out[:, -1, :]?
+
+        # TODO: #! why do we take out[:, -1, :]?
         out = self.FC(out[:, -1, :])
         out = self.FC_activation(out)
         out = self.output_actication(out)
