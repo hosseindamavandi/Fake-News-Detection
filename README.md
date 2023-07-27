@@ -46,8 +46,6 @@ The CNN1D model is used for feature extraction using 1D convolution, which is ef
 ### Recurrent Neural Network approach (LSTM):
 The LSTM model utilizes a Bi-directional LSTM layer for empowering sequence extraction. The subsequent classification is performed using an MLP.
 
-Remember to include any relevant installation, setup, and usage instructions in your README, along with any necessary credits and references for the dataset and code snippets used. Also, feel free to expand the README with more details about the project's architecture, evaluation metrics, and future improvements. Happy coding!
-
 ## Conclusion
 
 ## How to use
