@@ -53,7 +53,7 @@ class Linear_block(nn.Module):
 class CNN1D(nn.Module):
     def __init__(self):
         super(CNN1D, self).__init__()
-        # TODO : #! Why the kernel size must be one?
+        # TODO : #! Why the kernel size must be one? -> 
         self.conv1 = nn.Conv1d(
             in_channels=100, out_channels=64, kernel_size=1, stride=1, padding=1
         )
