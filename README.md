@@ -7,7 +7,7 @@ Fake News Detection using AI is a project aimed at combatting misinformation and
 The dataset used for this project contains two types of articles: fake and real news. It was collected from real-world sources, with truthful articles obtained by crawling articles from Reuters.com, a reputable news website. The fake news articles, on the other hand, were collected from various unreliable websites that were flagged by Politifact, a fact-checking organization in the USA, and Wikipedia. The dataset consists of different types of articles covering various topics, but the majority of them focus on political and world news topics.
 
 The dataset is provided in two CSV files:
-1. `True.csv` - Contains more than 12,600 articles from Reuters.com.
+1. `True.csv` - Contains more than 12,600 articles from [Reuters.com](Reuters.com).
 2. `Fake.csv` - Contains more than 12,600 articles from different fake news outlet resources.
 
 Each article in the dataset includes the following information:
