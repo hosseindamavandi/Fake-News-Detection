@@ -46,6 +46,19 @@ The CNN1D model is used for feature extraction using 1D convolution, which is ef
 ### Recurrent Neural Network approach (LSTM):
 The LSTM model utilizes a Bi-directional LSTM layer for empowering sequence extraction. The subsequent classification is performed using an MLP.
 
-## Conclusion
+## Model Training
+All models underwent rigorous training for 300 Epochs.
+
+## Loss Function
+The binary Cross Entropy loss (BCE) was meticulously optimized during training.
+
+## Optimizer
+The ADAM optimizer, with a fixed learning rate of 3e-4, was utilized for enhanced performance.
+
+## Performance Ranking
+After evaluating the models, the performance ranking was as follows:
+1. Artificial Neural Network (ANN)
+2. Bidirectional LSTM (BILSTM)
+3. Convolutional Neural Network (CNN1D)
 
 ## How to use
