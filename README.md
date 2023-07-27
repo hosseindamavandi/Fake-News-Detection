@@ -20,7 +20,7 @@ The data collected for [Kaggle.com](Kaggle.com) primarily covers articles from 2
 
 The following table gives a breakdown of the categories and the number of articles per category:
 
-<img width="481" alt="Screenshot 1402-05-05 at 6 21 16 PM" src="https://github.com/hosseindamavandi/Fake-News-Detection/assets/83751182/bf35931e-4a4e-4410-b9e9-5575a78f1a78">
+<img width="481" alt="dataset-table" src="content/table.png">
 
 
 ## Data Preprocessing
