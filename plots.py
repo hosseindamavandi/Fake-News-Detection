@@ -1,6 +1,6 @@
 import plotly.graph_objects as go
 import pandas as pd
-import streamlit as st
+# import streamlit as st
 
 
 def animate_plot(
