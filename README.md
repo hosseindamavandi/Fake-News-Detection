@@ -64,4 +64,3 @@ After evaluating the models, the performance ranking was as follows:
 
 <img width="481" alt="dataset-table" src="content/Loss.jpg">
 
-## How to use
