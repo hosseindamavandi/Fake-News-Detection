@@ -1,7 +1,8 @@
 datasets\Fake.csv
 word2vec_model
 *.zip
-*.csv
+
 creds.py
-*.pth
+
 test.ipynb
+temp
