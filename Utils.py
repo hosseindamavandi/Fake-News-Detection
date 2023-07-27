@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import Dataset, DataLoader
-from torchmetrics import Accuracy
+# from torchmetrics import Accuracy
 from csv import DictWriter
 
 
