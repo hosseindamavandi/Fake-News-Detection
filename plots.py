@@ -189,8 +189,8 @@ def animate_plot(
     # fig.update_yaxes(showspikes=True, spikecolor="orange", spikethickness=2)
     # fig.update_layout(hovermode="closest")
 
-    if streamlit:
-        st.plotly_chart(fig)
+    # if streamlit:
+    #     st.plotly_chart(fig)
     else:
         fig.show()
 
