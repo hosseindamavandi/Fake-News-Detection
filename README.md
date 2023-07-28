@@ -47,6 +47,9 @@ The CNN1D model is used for feature extraction using 1D convolution, which is ef
 The LSTM model utilizes a Bi-directional LSTM layer for empowering sequence extraction. The subsequent classification is performed using an MLP.
 
 ## Conclusion
+
+<img width="481" alt="dataset-table" src="content/Loss.jpg">
+
 ### Model Training
 All models underwent rigorous training for 300 Epochs.
 
@@ -62,5 +65,19 @@ After evaluating the models, the performance ranking was as follows:
 2. Bidirectional LSTM (BILSTM)
 3. Convolutional Neural Network (CNN1D)
 
-<img width="481" alt="dataset-table" src="content/Loss.jpg">
+## How to Use - Demo
 
+Follow the steps below to use the "Fake News Detection" models using the provided Colab notebook:
+
+1. Open the Colab notebook titled `Colab_Test.ipynb`.
+
+2. Ensure you have access to the required necessary files.
+
+3. Use the following command to test a specific model:
+
+```python
+!python test.py --model "Model name" --colab True
+```
+- Replace "Model name" with the name of the model you want to test. The available model names are: ANN, CNN1D, and LSTM.
+
+The script will load the selected model and use it to detect fake news from the provided dataset.
