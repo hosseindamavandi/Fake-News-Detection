@@ -7,7 +7,7 @@ Fake News Detection using AI is a project aimed at combatting misinformation and
 The dataset used for this project contains two types of articles: fake and real news. It was collected from real-world sources, with truthful articles obtained by crawling articles from Reuters.com, a reputable news website. The fake news articles, on the other hand, were collected from various unreliable websites that were flagged by Politifact, a fact-checking organization in the USA, and Wikipedia. The dataset consists of different types of articles covering various topics, but the majority of them focus on political and world news topics.
 
 The dataset is provided in two CSV files:
-1. `True.csv` - Contains more than 12,600 articles from [Reuters.com](Reuters.com).
+1. `True.csv` - Contains more than 12,600 articles from [Reuters.com](https://www.reuters.com/).
 2. `Fake.csv` - Contains more than 12,600 articles from different fake news outlet resources.
 
 Each article in the dataset includes the following information:
@@ -16,7 +16,7 @@ Each article in the dataset includes the following information:
 - Type (real or fake)
 - Date the article was published on
 
-The data collected for [Kaggle.com](Kaggle.com) primarily covers articles from 2016 to 2017. The data were cleaned and processed, with the punctuations and mistakes in the fake news articles retained in the text.
+The data collected for [Kaggle.com](https://kaggle.com/) primarily covers articles from 2016 to 2017. The data were cleaned and processed, with the punctuations and mistakes in the fake news articles retained in the text.
 
 The following table gives a breakdown of the categories and the number of articles per category:
 
@@ -47,5 +47,20 @@ The CNN1D model is used for feature extraction using 1D convolution, which is ef
 The LSTM model utilizes a Bi-directional LSTM layer for empowering sequence extraction. The subsequent classification is performed using an MLP.
 
 ## Conclusion
+### Model Training
+All models underwent rigorous training for 300 Epochs.
 
-## How to use
+### Loss Function
+The binary Cross Entropy loss (BCE) was meticulously optimized during training.
+
+### Optimizer
+The ADAM optimizer, with a fixed learning rate of 3e-4, was utilized for enhanced performance.
+
+### Performance Ranking
+After evaluating the models, the performance ranking was as follows:
+1. Artificial Neural Network (ANN)
+2. Bidirectional LSTM (BILSTM)
+3. Convolutional Neural Network (CNN1D)
+
+<img width="481" alt="dataset-table" src="content/Loss.jpg">
+
