@@ -33,6 +33,15 @@ if __name__ == "__main__":
     parser.add_argument("--colab", type=bool, default=False)
     args = parser.parse_args()
     
+    if args.colab:
+        word2vec_model = gensim.models.Word2Vec.load(colab_path)
+        path_pytorch_ANN = r'/content/Fake-News-Detection/model_files/ANN_best_model.pth'
+        path_pytorch_CNN1D = r'/content/Fake-News-Detection/model_files/CNN1D_best_model.pth'
+        path_pytorch_LSTM = r'/content/Fake-News-Detection/model_files/BILSTM_best_model.pth'
+        
+        
+    else:
+        word2vec_model = gensim.models.Word2Vec.load(local_path)
     if args.model == "ANN":
         model = ANN()
         model.load_state_dict(torch.load(path_pytorch_ANN))
@@ -48,10 +57,6 @@ if __name__ == "__main__":
         raise Exception("Invalid model name, please choose one of the following: ANN, CNN1D, LSTM, BILSTM")
     
     
-    if args.colab:
-        word2vec_model = gensim.models.Word2Vec.load(colab_path)
-    else:
-        word2vec_model = gensim.models.Word2Vec.load(local_path)
 
     print(f"{model._get_name()} model loaded successfully\n")
     sample = input("Enter a news: ")
