@@ -16,7 +16,7 @@ Each article in the dataset includes the following information:
 - Type (real or fake)
 - Date the article was published on
 
-The data collected for [Kaggle.com]((https://kaggle.com/) primarily covers articles from 2016 to 2017. The data were cleaned and processed, with the punctuations and mistakes in the fake news articles retained in the text.
+The data collected for [Kaggle.com](https://kaggle.com/) primarily covers articles from 2016 to 2017. The data were cleaned and processed, with the punctuations and mistakes in the fake news articles retained in the text.
 
 The following table gives a breakdown of the categories and the number of articles per category:
 
