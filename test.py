@@ -6,6 +6,7 @@ from Utils import *
 from preprocess import *
 from models import ANN, CNN1D, BILSTM
 from torch.utils.data import Dataset, DataLoader
+import gensim
 
 INPUT_SIZE = 100
 HIDDEN_STATE = 64
@@ -15,12 +16,16 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 path_word2vec = "C:\\Users\\DELL\\OneDrive\\Desktop\\AI projects\\Fake-News-Detection\\word2vec_model\\word2vec.model"
+
 path_pytorch_ANN = r'model_files\ANN_best_model.pth'
 path_pytorch_CNN1D = r'model_files\CNN1D_best_model.pth'
 path_pytorch_LSTM = r'model_files\BILSTM_best_model.pth'
 
+try :
+    word2vec_model = gensim.models.Word2Vec.load(path_word2vec)
+except FileNotFoundError:
+    word2vec_model = gensim.models.Word2Vec.load("/content/MyDrive/ANN/temp/word2vec_models/word2vec.model")
 
-word2vec_model = Load_word2vec(path_word2vec)
 
 
 
