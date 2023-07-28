@@ -127,4 +127,4 @@ def predict(sample, word2vec_model, pytorch_model, device, prepare_for="ANN"):
     if model_output > 0.5:
         return f"Real, with probability: {100*model_output.item():.2f}%"
     else:
-        return f"Fake, with probability: {100*model_output.item():.2f}%"
+        return f"Fake, with probability: {100*(1-model_output.item()):.2f}%"
