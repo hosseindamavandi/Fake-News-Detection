@@ -109,7 +109,6 @@ def predict(sample, word2vec_model, pytorch_model, device, prepare_for="ANN"):
         try:
             # * BILSTM Case
             processed_sample = processed_sample.unsqueeze(0).unsqueeze(1)
-            print(processed_sample.shape)
             model_output = pytorch_model(processed_sample)
         except:
             print("Change the Value of prepare_for to BILSTM")
@@ -118,7 +117,6 @@ def predict(sample, word2vec_model, pytorch_model, device, prepare_for="ANN"):
         try:
             # * CNN1D Case
             processed_sample = processed_sample.unsqueeze(0)
-            print(processed_sample.shape)
             model_output = pytorch_model(processed_sample)
         except:
             print("Change the Value of prepare_for to CNN1D")
