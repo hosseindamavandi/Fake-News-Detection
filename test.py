@@ -24,7 +24,8 @@ path_pytorch_LSTM = r'model_files\BILSTM_best_model.pth'
 try :
     word2vec_model = gensim.models.Word2Vec.load(path_word2vec)
 except FileNotFoundError:
-    word2vec_model = gensim.models.Word2Vec.load("/content/MyDrive/ANN/temp/word2vec_models/word2vec.model")
+    new_path = input("Enter the path to the word2vec model: ")
+    word2vec_model = gensim.models.Word2Vec.load(new_path)
 
 
 
