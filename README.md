@@ -40,15 +40,21 @@ In this project, three different AI approaches are used for fake news detection:
 ### Artificial Neural Network approach (MLP):
 The MLP model employs a classical combination of linear layers with LeakyReLU and sigmoid activations. Dropout is applied to enhance generalization in the model.
 
+<img alt="ANN.png" src="content/ANN.png">
+
 ### Convolutional Neural Network approach (CNN1D):
 The CNN1D model is used for feature extraction using 1D convolution, which is effective for sequence analysis. Subsequent classification is performed using an MLP.
+
+<img alt="BLSTM.png" src="content/BLSTM.png">
 
 ### Recurrent Neural Network approach (LSTM):
 The LSTM model utilizes a Bi-directional LSTM layer for empowering sequence extraction. The subsequent classification is performed using an MLP.
 
+<img alt="CNN1D.png" src="content/CNN1D.png">
+
 ## Conclusion
 
-<img width="481" alt="dataset-table" src="content/Loss.jpg">
+<img width="481" alt="Loss.jpg" src="content/Loss.jpg">
 
 ### Model Training
 All models underwent rigorous training for 300 Epochs.
